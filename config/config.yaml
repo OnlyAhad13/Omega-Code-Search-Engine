@@ -1,0 +1,51 @@
+# Model Configuration
+model:
+  codebert_model: "microsoft/codebert-base"
+  gnn_type: "GAT"  # GAT or GCN
+  gnn_hidden_dim: 256
+  gnn_num_layers: 3
+  gnn_heads: 4
+  dropout: 0.1
+  fusion_method: "concat"  # concat, attention, gated
+  final_embedding_dim: 768
+
+# Training Configuration
+training:
+  batch_size: 32
+  num_epochs: 50
+  learning_rate: 2e-5
+  weight_decay: 0.01
+  warmup_steps: 1000
+  gradient_accumulation_steps: 4
+  max_grad_norm: 1.0
+  triplet_margin: 0.5
+  hard_negative_weight: 0.3
+  
+# Data Configuration
+data:
+  max_code_length: 512
+  max_ast_nodes: 500
+  languages: ["python", "javascript", "java"]
+  train_split: 0.8
+  val_split: 0.1
+  test_split: 0.1
+  num_workers: 4
+
+# Evaluation Configuration
+evaluation:
+  recall_k: [1, 5, 10, 20]
+  batch_size: 64
+
+# Inference Configuration
+inference:
+  faiss_index_type: "IVF"  # Flat, IVF, HNSW
+  faiss_nlist: 100
+  faiss_nprobe: 10
+  top_k: 10
+
+# Paths
+paths:
+  data_dir: "./data/datasets"
+  model_save_dir: "./checkpoints"
+  index_save_dir: "./indexes"
+  logs_dir: "./logs"
