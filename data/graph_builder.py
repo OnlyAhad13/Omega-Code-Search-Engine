@@ -35,6 +35,8 @@ class GraphBuilder:
         num_nodes = len(nodes)
         
         node_features = []
+        node_ids_list = []
+        
         for node in nodes:
             node_type_id = self._get_node_type_id(node['type'])
             depth = node['depth']
@@ -48,12 +50,14 @@ class GraphBuilder:
                 is_named
             ]
             node_features.append(features)
+            node_ids_list.append(node_type_id) 
         
         x = torch.tensor(node_features, dtype=torch.float)
+        node_ids = torch.tensor(node_ids_list, dtype=torch.long)
         
         edge_index = self._build_edge_index(nodes, num_nodes)
         
-        graph = Data(x=x, edge_index=edge_index)
+        graph = Data(x=x, edge_index=edge_index, node_ids=node_ids)
         graph.num_nodes = num_nodes
         
         return graph
@@ -117,7 +121,8 @@ class GraphBuilder:
         """Create an empty graph for error cases"""
         x = torch.zeros((1, 4), dtype=torch.float)
         edge_index = torch.zeros((2, 0), dtype=torch.long)
-        return Data(x=x, edge_index=edge_index, num_nodes=1)
+        node_ids = torch.zeros(1, dtype=torch.long)
+        return Data(x=x, edge_index=edge_index, node_ids=node_ids, num_nodes=1)
     
     def get_vocab_size(self) -> int:
         """Get the size of node type vocabulary"""

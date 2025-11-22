@@ -1,7 +1,7 @@
 torch==2.1.0
 torch-geometric==2.4.0
 transformers==4.35.0
-tree-sitter==0.20.4
+tree-sitter>=0.25.0
 faiss-cpu==1.7.4
 fastapi==0.104.1
 uvicorn==0.24.0
