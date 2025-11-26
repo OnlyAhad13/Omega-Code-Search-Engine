@@ -45,9 +45,9 @@ cd code-search-engine
 pip install -r requirements.txt
 ```
 
-3. Download tree-sitter grammars:
+3. Verify tree-sitter grammars:
 ```bash
-python scripts/download_tree_sitter.py
+python scripts/verify_tree_sitter.py
 ```
 
 ## Usage

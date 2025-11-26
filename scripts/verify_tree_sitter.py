@@ -12,8 +12,8 @@ logger = logging.getLogger(__name__)
 from data.ast_parser import ASTParser
 
 def main():
-    """Download and setup tree-sitter grammars"""
-    logger.info("Setting up tree-sitter grammars...")
+    """Verify tree-sitter grammars are installed and working"""
+    logger.info("Verifying tree-sitter grammars...")
     
     try:
         parser = ASTParser(languages=['python', 'javascript', 'java'])
